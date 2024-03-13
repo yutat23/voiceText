@@ -1,16 +1,15 @@
 import os
 from moviepy.editor import VideoFileClip
 import whisper
+import sys
 
-# Set the paths
-base_dir = ""
+if len(sys.argv) < 2:
+    print("Usage: python script.py video_filename")
+    sys.exit(1)
 
-video_folder = base_dir
-video_filename = ""  # Replace with your actual video file name
-video_path = os.path.join(video_folder, video_filename)
+video_path = sys.argv[1]
 
-audio_folder = base_dir
-output_audio_path = os.path.join(audio_folder, "temp_audio.mp3")
+output_audio_path = "temp_audio.mp3"
 
 # Extract audio from the video
 video = VideoFileClip(video_path)
@@ -25,4 +24,3 @@ print(result["text"])
 
 # Remove the temporary audio file
 os.remove(output_audio_path)
-
